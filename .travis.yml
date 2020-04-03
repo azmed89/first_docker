@@ -3,5 +3,14 @@ services:
   - docker
 
 script:
-  - docker build -t mannydesigns/node2 .
-  - docker images mannydesigns/node2
+  - docker build -t azmed/node .
+  - docker images azmed/node
+
+before_deploy:
+  - docker login -u azmed -p AZ0669926317dev
+
+deploy:
+  provider: script
+  script: docker push azmed/node
+  on:
+    branch: master
